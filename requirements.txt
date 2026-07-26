@@ -1,0 +1,9 @@
+requests
+pillow
+
+# face_recognition (scripts/consistency_check.py) is intentionally NOT
+# listed here: it depends on dlib, which needs a C++ build toolchain
+# (cmake + Visual Studio Build Tools "Desktop development with C++" on
+# Windows) — a much heavier install than the deps above. Install it
+# separately, after confirming that toolchain is present:
+#   pip install face_recognition
