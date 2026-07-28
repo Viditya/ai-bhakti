@@ -15,7 +15,7 @@ in TASK.md triggers.
 4. Immediately write the result to that video's block in PROGRESS.md.
    Update `status`, relevant paths/scores, `last_updated_by`, and
    `spend_usd` if the step cost money.
-5. If this step was a gate (script or consistency) and it FAILED:
+5. If this step was a gate (script, Hindi QA, or consistency) and it FAILED:
    - increment the relevant counter in `attempt_counts`
    - if counter < max_retry_per_gate (from TASK.md): set status back to
      the pre-gate state, attach the failure feedback for the next attempt
@@ -30,6 +30,11 @@ in TASK.md triggers.
 - Parakh's script scores: all 5 axis scores present and numeric,
   overall computed with the documented weights (see parakh/SKILL.md),
   not eyeballed as "looks like an 8."
+- Bhashavid's output: `scripts/hindi_text_check.py` passed; zero critical/high
+  issues remain; NFC normalization, bundled font, complex-text shaping, and
+  screenshots containing `चित्रकथा`, `मूर्च्छित`, and `सृष्टि` were checked.
+  Bhashavid approval still leaves `hindi_human_approved: false` until a named
+  fluent Hindi reviewer signs off.
 - Chitrkar's shots: consistency score computed against the ACTUAL
   character_lock file, not assumed.
 - Sampadak's output: run the actual verification functions in

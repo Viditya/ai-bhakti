@@ -3,57 +3,60 @@
 ## What's real vs. what's a stub in this package (read this before anything else)
 
 **Actually working, tested code:**
-- `scripts/ffmpeg_assemble.py` — all four verification functions
-  (duration match, watermark presence, blank-frame detection, resolution
-  check) are implemented and were tested end-to-end against a generated
-  sample clip (see `tests/test_ffmpeg_assemble.py` — run it yourself to
-  confirm: `python3 tests/test_ffmpeg_assemble.py`). Requires `ffmpeg`,
-  `ffprobe`, and `Pillow` (`pip install pillow --break-system-packages`
-  if not already present).
+- `scripts/ffmpeg_assemble.py` — assembles still shots, narration, optional
+  BGM, watermark, and SRT captions into a vertical MP4, then exposes four
+  verification functions (duration, watermark-region heuristic, blank
+  frames, and resolution).
+- `scripts/assemble_video.py` — supervised command-line assembly entry point.
+- `scripts/captions.py` — deterministic first-pass SRT generation. Timing
+  remains subject to human review.
 - `scripts/youtube_upload.py` — the human-approval gate is real and
-  tested (refuses without both `--confirmed` AND `human_approved: true`
-  in PROGRESS.md). The actual YouTube Data API upload call is
-  intentionally NOT implemented — see the TODO in that file.
+  tested, including UTF-8 progress files on Windows. The actual YouTube
+  Data API upload remains intentionally unimplemented.
+- `tests/test_pipeline_safety.py` — offline tests for approval, assembly
+  command construction, and caption generation.
 
-**Stubs that will raise `NotImplementedError` on purpose:**
-- `scripts/higgsfield_client.py` — the method shapes are a reasonable
-  guess, NOT verified against Higgsfield's current API. Confirm their
-  docs before implementing.
-- `scripts/elevenlabs_client.py` — same caveat, lower risk since
-  ElevenLabs' API is more stable, but Hindi voice availability and exact
-  params still need confirming.
+**Provider boundaries requiring live account validation:**
+- `scripts/higgsfield_client.py` submits, polls, and downloads generated
+  images. Soul ID creation remains outside this Python client; use the
+  official Higgsfield CLI/dashboard and set `HIGGSFIELD_SOUL_ID`.
+- `scripts/elevenlabs_client.py` generates narration and writes it
+  durably. Select and approve a Hindi voice, then set
+  `ELEVENLABS_VOICE_ID`.
 
 **Documentation/config (no code, but load-bearing for Claude Code):**
 - `VISION.md`, `CLAUDE.md`, `TASK.md`, `PROGRESS.md`, `LOOP_INSTRUCTIONS.md`
-- `.claude/skills/*/SKILL.md` — five agent definitions
+- `.claude/skills/*/SKILL.md` — six agent definitions, including Bhashavid's
+  mandatory Hindi-language and Devanagari-rendering gate
 
 ## Exact setup steps
 
 1. Unzip this into your project location (or use as the whole project root).
 2. `cd ai-bhakti`
-3. `pip install pillow --break-system-packages` (if not already installed)
-4. Confirm ffmpeg/ffprobe are on PATH: `which ffmpeg ffprobe`
+3. Create a virtual environment and run `pip install -r requirements.txt`.
+4. Confirm `ffmpeg` and `ffprobe` are on PATH.
 5. Run the test to prove the verification logic works on your machine:
-   `python3 tests/test_ffmpeg_assemble.py`
+   `python tests/test_ffmpeg_assemble.py`
    You should see "ALL TESTS PASSED" at the end.
-6. Open this folder in Claude Code (`claude` in this directory). It will
+6. Run the offline safety suite:
+   `python -m unittest -v tests.test_pipeline_safety`
+7. Open this folder in Claude Code (`claude` in this directory). It will
    pick up `CLAUDE.md` automatically.
-7. Edit `TASK.md` with your first real story premise.
-8. Populate `references/character_locks/` with at least one reference
-   image before running anything involving a recurring deity.
-9. Before touching `higgsfield_client.py` or `elevenlabs_client.py`, tell
+8. Edit `TASK.md` with your first real story premise.
+9. Add the approved character lock and brand watermark, create a Higgsfield
+   Soul ID, select an ElevenLabs voice, and populate the variables shown in
+   `.env.example`.
+10. Before touching `higgsfield_client.py` or `elevenlabs_client.py`, tell
    Claude Code to check current API docs for each — do not implement
    against the guessed interface shapes without verifying first.
-10. Start with ONE video end-to-end, manually stepping through each
+11. Start with ONE video end-to-end, manually stepping through each
     agent yourself before letting the orchestrator run the full loop
     unattended. This is the same "prove each piece in isolation first"
     principle from the progressive-prompting approach.
 
 ## What I did NOT do, and why
-- I did not fabricate Higgsfield/ElevenLabs API details to make the
-  stubs "look complete" — a plausible-looking but wrong API call is
-  worse than an honest `NotImplementedError`, because it fails silently
-  or confusingly instead of loudly.
+- I did not automate Soul ID training through an unverified private REST
+  path. The supported CLI/dashboard remains the onboarding boundary.
 - I did not build the YouTube Data API upload call itself — that
   requires your actual Google Cloud project, OAuth consent screen, and
   possibly a quota increase request, which only you can set up.

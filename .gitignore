@@ -1,4 +1,15 @@
 __pycache__/
 *.pyc
+.venv/
+.tools/
 .env
 .env.*
+!.env.example
+
+# The interactive reader is an independently deployed nested repository.
+experiments/comicbook/reader/
+
+# Reproducible comic-render intermediates and duplicate experiment PDFs.
+experiments/comicbook/*/rendered_pages/
+experiments/comicbook/*/rendered_pdf/
+experiments/comicbook/*/*.pdf

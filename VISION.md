@@ -6,9 +6,11 @@ the Ramayana, Mahabharata, and Puranas, benchmarked against channels like
 Dev Kathan Shorts (335K subscribers, 107 videos as of last research pass).
 
 ## Non-negotiables (do not treat these as optional/creative choices)
-1. Every video with a recurring deity/character MUST use a locked reference
-   image from `references/character_locks/`. Never generate a recurring
-   character "from scratch" per shot.
+1. Every video with a recurring deity/character MUST resolve the exact
+   `character_id` + `age_stage` from
+   `references/character_locks/manifest.json` and use that locked reference.
+   Never generate a recurring character from scratch or silently substitute
+   a nearby age.
 2. Every script MUST pass Parakh's hook-score gate (overall >= 8/10) before
    entering visual/audio production.
 3. NO video is uploaded without a human setting `human_approved: true` in

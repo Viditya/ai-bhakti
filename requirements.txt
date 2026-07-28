@@ -1,5 +1,6 @@
-requests
-pillow
+requests>=2.32,<3
+pillow>=10,<13
+reportlab>=4.4,<5
 
 # face_recognition (scripts/consistency_check.py) is intentionally NOT
 # listed here: it depends on dlib, which needs a C++ build toolchain

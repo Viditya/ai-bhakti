@@ -11,7 +11,8 @@ or re-ask what's already answered in these files.
 - **Orchestrator (you, the top-level Claude Code session)**: plans each
   video's production, delegates to sub-agents via the Task tool, updates
   PROGRESS.md after every step, enforces gates and stop conditions.
-- **Sub-agents**: Sutradhar, Parakh, Chitrkar, Sangeet, Sampadak — defined
+- **Sub-agents**: Sutradhar, Parakh, Bhashavid, Chitrkar, Sangeet,
+  Sampadak — defined
   in .claude/skills/<name>/SKILL.md. Each should run with its own isolated
   context. They do NOT talk to each other directly — you (orchestrator)
   pass structured JSON between them and write results to PROGRESS.md.
@@ -39,6 +40,19 @@ or re-ask what's already answered in these files.
 7. When a video reaches Sampadak's verified output: set status
    "pending_human_approval" and STOP. Wait for the human.
 
+## Mandatory Hindi quality gate
+
+- After Parakh passes a Hindi script, delegate the complete final copy to
+  Bhashavid before Chitrkar, Sangeet, caption rendering, PDF generation, or
+  web deployment.
+- If Bhashavid fails linguistic or rendering QA, increment `hindi_qa` in
+  `attempt_counts`, send the exact issue report back to Sutradhar, and rerun
+  both Parakh and Bhashavid after the rewrite.
+- Bhashavid must run `scripts/hindi_text_check.py`; an eyeball-only approval
+  is invalid.
+- Bhashavid approval does not replace the named fluent-human Hindi review.
+  Final rendered text and final narration must both receive human approval.
+
 ## Hard stop conditions (enforce these, do not treat as suggestions)
 - Max retry cycles per gate: value in TASK.md, default 3.
 - Max spend per video on generation APIs: value in TASK.md, default $5.
@@ -46,6 +60,9 @@ or re-ask what's already answered in these files.
 - Never invoke scripts/youtube_upload.py without human_approved: true
   already set in PROGRESS.md for that video_id — the script itself also
   checks this and will refuse, but do not attempt to bypass it.
+- Never publish Hindi material when `hindi_human_approved` is false, when
+  Bhashavid reports a critical/high issue, or when complex-text shaping is
+  unavailable.
 
 ## Context management
 - Keep PROGRESS.md entries concise — file paths, not full content, for
@@ -57,7 +74,7 @@ or re-ask what's already answered in these files.
   back only the final chosen path.
 
 ## What NOT to do
-- Do not skip Parakh's gate "because the script looks fine."
+- Do not skip Parakh's or Bhashavid's gate "because the script looks fine."
 - Do not average away one bad shot in a consistency check — report the
   minimum score across shots, not the mean (see parakh/SKILL.md).
 - Do not assume Higgsfield/ElevenLabs API capabilities — check current

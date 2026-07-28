@@ -30,13 +30,20 @@ description: Assembles the final video from shots and audio, overlays watermark 
 ```
 
 ## Rules — self-verification is mandatory, not optional
-Before reporting done, call the REAL functions in
+First call `scripts/ffmpeg_assemble.py`'s `assemble_video()` (or the
+`scripts/assemble_video.py` CLI) to create the final MP4. Pass the approved
+watermark and reviewed SRT captions; neither is optional for publication.
+
+Before reporting done, call the REAL verification functions in
 `scripts/ffmpeg_assemble.py` (not a manual eyeball check) to assert ALL of:
 1. `check_duration_match()` — |audio_duration - video_duration| < 0.5s
 2. `check_watermark_present()` — watermark detected in sampled frames,
    not just the first frame
 3. `check_no_blank_frames()` — no black/blank frames at cut points
 4. `check_resolution()` — output is 1080x1920 (9:16)
+
+The watermark check is a region-presence heuristic, not logo recognition.
+Human review must confirm the correct logo until template matching is added.
 
 If ANY check returns False: fix the underlying issue and rerun ALL checks
 from step 1. Do not report `final_video_path` as done on a partial pass —

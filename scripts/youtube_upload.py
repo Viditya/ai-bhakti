@@ -24,7 +24,7 @@ class ApprovalNotGrantedError(Exception):
 
 
 def _read_progress_entry(progress_md_path: str, video_id: str) -> str:
-    content = Path(progress_md_path).read_text()
+    content = Path(progress_md_path).read_text(encoding="utf-8")
     # crude but effective: find the block starting at "## <video_id>"
     # up to the next "## " heading or end of file
     pattern = rf"## {re.escape(video_id)}\n(.*?)(?=\n## |\Z)"
@@ -71,6 +71,8 @@ def upload(
             f"{video_id}. Refusing to upload. Set it explicitly after "
             f"human review, then retry."
         )
+    if not Path(final_video_path).is_file():
+        raise FileNotFoundError(f"Final video does not exist: {final_video_path}")
 
     # TODO: real YouTube Data API v3 upload call goes here.
     # Confirm current OAuth flow and quota requirements before

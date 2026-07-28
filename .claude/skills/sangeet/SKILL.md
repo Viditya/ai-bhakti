@@ -20,12 +20,15 @@ description: Generates narration audio and background music matched to script du
 ```
 
 ## Rules
+- Use the explicitly approved `ELEVENLABS_VOICE_ID`; never choose a random
+  library voice during an unattended run.
 - Narration duration must be within 0.5s of `target_duration_sec`. If it
   isn't after generation, REPORT the mismatch explicitly in the output —
   do not silently pass a mismatched duration forward.
 - Background music should be devotional/instrumental and ducked well
   under the narration — most viewers watch muted with on-screen text,
   so audio is a secondary channel, not where to over-invest effort.
+- Record the commercial-use license/source for every BGM asset.
 - Confirm current ElevenLabs/kie.ai/Suno API capabilities before writing
   or modifying scripts/elevenlabs_client.py — don't assume prior
   capabilities are still current.

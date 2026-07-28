@@ -20,10 +20,12 @@ unproven end-to-end):
   see that file's docstring), so this cannot be automated yet; either (a)
   Viditya supplies/approves a reference image, or (b) a Soul ID is created
   manually via the Higgsfield dashboard/CLI first.
-- Credentials also not yet set on this machine: HIGGSFIELD_API_KEY,
-  HIGGSFIELD_API_KEY_SECRET, ELEVENLABS_API_KEY (see scripts/config.py).
-  Sutradhar (script generation) and Parakh (scoring) don't need these and
-  can run now; Chitrkar and Sangeet are blocked until credentials are set.
+- Credentials and provider selections are not yet set on this machine:
+  HIGGSFIELD_API_KEY, HIGGSFIELD_API_KEY_SECRET, HIGGSFIELD_SOUL_ID,
+  ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID (see scripts/config.py).
+  Sutradhar (script generation), Parakh (scoring), and Bhashavid (Hindi
+  language/rendering QA) don't need these and can run now; Chitrkar and
+  Sangeet are blocked until credentials are set.
 - target_length_sec: [40, 60]
 - max_retry_per_gate: 3
 - max_spend_per_video_usd: 5
@@ -42,12 +44,13 @@ in PROGRESS.md (video_001/002/003). Nothing else can proceed until the two
 items below are done — this is a genuine external blocker, not a coding gap.
 
 ### Before starting next session (human action, not Claude Code)
-1. Set three env vars: `HIGGSFIELD_API_KEY`, `HIGGSFIELD_API_KEY_SECRET`,
-   `ELEVENLABS_API_KEY`.
+1. Set the five values listed in `.env.example`, including the approved
+   Higgsfield Soul ID and ElevenLabs voice ID.
 2. Put a Hanuman reference into `references/character_locks/hanuman_v1.png`
-   (or create a Soul ID via the Higgsfield dashboard/CLI and note its
-   reference ID here instead of a file).
-3. Run `python scripts/preflight_check.py` yourself first. If it doesn't
+   and create its Soul ID through the supported Higgsfield dashboard/CLI.
+3. Put the approved transparent logo at
+   `references/brand/watermark.png`.
+4. Run `python scripts/preflight_check.py` yourself first. If it doesn't
    print `READY`, fix what it flags before invoking Claude Code again —
    don't spend a session re-discovering the same blockers.
 
@@ -81,7 +84,7 @@ the **Agent tool** instead, one per video per step:
   subagent_type: "general-purpose" })` — its context (image-generation
   back-and-forth, retries) stays isolated and doesn't bloat the
   orchestrator's own context.
-- Same pattern for Sangeet and Sampadak.
+- Same pattern for Bhashavid, Sangeet, and Sampadak.
 - The orchestrator's job becomes: read PROGRESS.md → spawn ONE subagent
   for the next step → take its structured result → write it to
   PROGRESS.md → move on. This matches CLAUDE.md's own role definition

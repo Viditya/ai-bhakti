@@ -6,7 +6,9 @@ Required env vars (none are currently set on this machine as of last check —
 set them before running Sangeet or Chitrkar for real):
   HIGGSFIELD_API_KEY
   HIGGSFIELD_API_KEY_SECRET
+  HIGGSFIELD_SOUL_ID
   ELEVENLABS_API_KEY
+  ELEVENLABS_VOICE_ID
 """
 
 import os
@@ -32,3 +34,11 @@ def higgsfield_credentials() -> tuple:
 
 def elevenlabs_credentials() -> str:
     return _require("ELEVENLABS_API_KEY")
+
+
+def higgsfield_soul_id() -> str:
+    return _require("HIGGSFIELD_SOUL_ID")
+
+
+def elevenlabs_voice_id() -> str:
+    return _require("ELEVENLABS_VOICE_ID")

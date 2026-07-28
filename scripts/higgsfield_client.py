@@ -34,12 +34,31 @@ API console first:
 """
 
 import time
+from pathlib import Path
 from typing import Optional
 
 import requests
 
 API_BASE = "https://platform.higgsfield.ai"
 TERMINAL_STATUSES = {"nsfw", "failed", "completed"}
+
+
+def _asset_url(data: dict) -> str:
+    """Extract the first generated image URL from known response shapes."""
+    images = data.get("images")
+    if isinstance(images, list) and images:
+        first = images[0]
+        if isinstance(first, dict) and first.get("url"):
+            return first["url"]
+        if isinstance(first, str):
+            return first
+    for key in ("image", "output", "result"):
+        value = data.get(key)
+        if isinstance(value, dict) and value.get("url"):
+            return value["url"]
+    if data.get("url"):
+        return data["url"]
+    raise ValueError(f"Completed Higgsfield response contains no image URL: {data}")
 
 
 class HiggsfieldClient:
@@ -64,6 +83,7 @@ class HiggsfieldClient:
         self,
         prompt: str,
         character_lock_ref_id: str,
+        output_path: str,
         model_id: str = "higgsfield-ai/soul/standard",
         aspect_ratio: str = "9:16",
         resolution: str = "1080p",
@@ -108,7 +128,21 @@ class HiggsfieldClient:
             if data.get("status") in TERMINAL_STATUSES:
                 if data["status"] != "completed":
                     raise RuntimeError(f"Higgsfield generation ended with status={data['status']}: {data}")
-                return {"image_path": None, "request_id": request_id, "raw_response": data}
+                asset_url = _asset_url(data)
+                destination = Path(output_path)
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                with requests.get(asset_url, timeout=120, stream=True) as asset_resp:
+                    asset_resp.raise_for_status()
+                    with destination.open("wb") as output:
+                        for chunk in asset_resp.iter_content(chunk_size=1024 * 1024):
+                            if chunk:
+                                output.write(chunk)
+                return {
+                    "image_path": str(destination),
+                    "request_id": request_id,
+                    "asset_url": asset_url,
+                    "raw_response": data,
+                }
             time.sleep(poll_interval_sec)
             elapsed += poll_interval_sec
 

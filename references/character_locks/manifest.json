@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "age_stages": {
+    "infant": { "typical_years": "0-2", "temporal": true },
+    "child": { "typical_years": "3-9", "temporal": true },
+    "adolescent": { "typical_years": "10-17", "temporal": true },
+    "young_adult": { "typical_years": "18-34", "temporal": true },
+    "mature_adult": { "typical_years": "35-59", "temporal": true },
+    "elder": { "typical_years": "60+", "temporal": true },
+    "ageless_adult": { "typical_years": null, "temporal": false },
+    "ageless_mature": { "typical_years": null, "temporal": false }
+  },
+  "characters": {
+    "hanuman": {
+      "display_name": "Hanuman",
+      "identity_root_stage": "child",
+      "identity_invariants": [
+        "large dark-brown almond eyes with fixed spacing",
+        "warm golden-tawny fur and lighter muzzle",
+        "swept-back dark-brown hair with fixed hairline",
+        "rounded monkey muzzle and large rounded ears",
+        "red U-shaped tilak with narrow gold center line",
+        "white sacred thread",
+        "saffron-red dhoti with fixed gold border motif",
+        "long curved tail with consistent tip"
+      ],
+      "stages": {
+        "child": {
+          "status": "locked",
+          "asset": "references/character_locks/hanuman/child/reference_v1.png",
+          "sha256": "60eefc76d1327f68e8af0dba7eeb2051529d6313ca6990b966704882f3ec08e5",
+          "source": "approved video_001 Hanuman reference",
+          "allowed_age_changes": [
+            "compact child proportions",
+            "rounder cheeks",
+            "no crown",
+            "no mace"
+          ]
+        }
+      },
+      "review_material": [
+        {
+          "purpose": "child-to-mature identity progression",
+          "status": "candidate",
+          "asset": "references/character_locks/hanuman/age_progression/candidate_v1.png",
+          "sha256": "6a67ad1093dbbe4afc57a0dca062e82462b8275ad763ae39dba9deb43e2368d1"
+        }
+      ]
+    },
+    "indra": {
+      "display_name": "Indra",
+      "identity_root_stage": "ageless_adult",
+      "identity_invariants": [
+        "long oval clean-shaven face",
+        "straight strong nose and heavy dark brows",
+        "shoulder-length black wavy hair",
+        "vertical white tilak with fine red center line",
+        "tall ornate gold crown with central flame silhouette",
+        "cream-white diagonal drape and saffron-gold dhoti",
+        "traditional symmetrical golden vajra"
+      ],
+      "stages": {
+        "ageless_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/indra/ageless_adult/reference_v1.png",
+          "sha256": "cb9e1221a3760f0be74fc1cbd3fcc23ffa9f44e345a7ae79c9f7f755250e0106",
+          "source": "derived from video_001 panel_05",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "surya": {
+      "display_name": "Surya",
+      "identity_root_stage": "ageless_adult",
+      "identity_invariants": [
+        "youthful long-oval clean-shaven face",
+        "calm almond dark-brown eyes",
+        "shoulder-length dark softly waved hair",
+        "red U-shaped tilak with slim golden center line",
+        "compact flame-point gold crown",
+        "circular solar halo with evenly spaced rays",
+        "saffron-orange upper drape and golden-orange dhoti"
+      ],
+      "stages": {
+        "ageless_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/surya/ageless_adult/reference_v1.png",
+          "sha256": "d826133a5e382ca2fca9f537d9d04010db097bab107ea97d2cb8bb41c591f4e1",
+          "source": "derived from video_001 panel_04",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "vayu": {
+      "display_name": "Vayu",
+      "identity_root_stage": "ageless_mature",
+      "identity_invariants": [
+        "broad mature face with kind dark-brown eyes",
+        "silver-black moustache and short neat beard",
+        "long swept-back charcoal hair with silver streaks and high topknot",
+        "white U-shaped tilak",
+        "low ornate open gold diadem",
+        "pale blue-grey wind scarf and muted teal drape",
+        "cream-white dhoti with gold border"
+      ],
+      "stages": {
+        "ageless_mature": {
+          "status": "locked",
+          "asset": "references/character_locks/vayu/ageless_mature/reference_v1.png",
+          "sha256": "e14d5d1330f3c7a536f056bcbd69a02112d0015c11f315b6cd244512ed0aaaee",
+          "source": "derived from video_001 panel_07",
+          "allowed_age_changes": []
+        }
+      }
+    }
+  }
+}

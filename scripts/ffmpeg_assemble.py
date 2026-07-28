@@ -16,9 +16,128 @@ import json
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Optional
 
 from PIL import Image
+
+
+def _require_file(path: str, label: str) -> Path:
+    resolved = Path(path)
+    if not resolved.is_file():
+        raise FileNotFoundError(f"{label} does not exist: {path}")
+    return resolved
+
+
+def _filter_path(path: str) -> str:
+    """Escape a path for an ffmpeg filter argument (not the shell)."""
+    value = str(Path(path).resolve()).replace("\\", "/")
+    return value.replace(":", r"\:").replace("'", r"\'")
+
+
+def assemble_video(
+    shot_image_paths: list[str],
+    narration_audio_path: str,
+    output_path: str,
+    *,
+    bgm_audio_path: str | None = None,
+    watermark_path: str | None = None,
+    captions_srt_path: str | None = None,
+    resolution: tuple[int, int] = (1080, 1920),
+    fps: int = 30,
+    bgm_volume: float = 0.12,
+) -> str:
+    """Create a vertical MP4 from still shots and narration.
+
+    Shots receive equal screen time and are scaled/cropped to fill the
+    requested frame. Optional BGM is looped and mixed below narration.
+    Optional watermark and SRT captions are burned into the video.
+    """
+    if not shot_image_paths:
+        raise ValueError("At least one shot image is required")
+    shots = [_require_file(path, "shot image") for path in shot_image_paths]
+    narration = _require_file(narration_audio_path, "narration audio")
+    bgm = _require_file(bgm_audio_path, "background music") if bgm_audio_path else None
+    watermark = _require_file(watermark_path, "watermark") if watermark_path else None
+    captions = _require_file(captions_srt_path, "captions") if captions_srt_path else None
+
+    duration = _ffprobe_duration(str(narration))
+    if duration <= 0:
+        raise ValueError("Narration duration must be positive")
+    shot_duration = duration / len(shots)
+    width, height = resolution
+
+    cmd = ["ffmpeg", "-y"]
+    for shot in shots:
+        cmd.extend(["-loop", "1", "-t", f"{shot_duration:.6f}", "-i", str(shot)])
+    narration_index = len(shots)
+    cmd.extend(["-i", str(narration)])
+    bgm_index = None
+    if bgm:
+        bgm_index = narration_index + 1
+        cmd.extend(["-stream_loop", "-1", "-i", str(bgm)])
+    watermark_index = None
+    if watermark:
+        watermark_index = narration_index + 1 + (1 if bgm else 0)
+        cmd.extend(["-i", str(watermark)])
+
+    filters = []
+    video_labels = []
+    for index in range(len(shots)):
+        label = f"v{index}"
+        filters.append(
+            f"[{index}:v]scale={width}:{height}:force_original_aspect_ratio=increase,"
+            f"crop={width}:{height},setsar=1,fps={fps},format=yuv420p[{label}]"
+        )
+        video_labels.append(f"[{label}]")
+    filters.append(
+        "".join(video_labels)
+        + f"concat=n={len(shots)}:v=1:a=0[vbase]"
+    )
+
+    current_video = "vbase"
+    if watermark_index is not None:
+        filters.append(
+            f"[{watermark_index}:v]scale={max(120, width // 6)}:-1[wm]"
+        )
+        filters.append(
+            f"[{current_video}][wm]overlay=W-w-{width // 24}:H-h-{height // 40}[vwm]"
+        )
+        current_video = "vwm"
+    if captions:
+        filters.append(
+            f"[{current_video}]subtitles=filename='{_filter_path(str(captions))}'"
+            ":force_style='Alignment=2,MarginV=160,FontSize=18,"
+            "Outline=2,Shadow=0'[vout]"
+        )
+        current_video = "vout"
+
+    if bgm_index is not None:
+        filters.append(
+            f"[{narration_index}:a]aresample=48000[narr];"
+            f"[{bgm_index}:a]volume={bgm_volume},aresample=48000[bg];"
+            "[narr][bg]amix=inputs=2:duration=first:dropout_transition=2[aout]"
+        )
+        audio_map = "[aout]"
+    else:
+        audio_map = f"{narration_index}:a"
+
+    destination = Path(output_path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    cmd.extend([
+        "-filter_complex", ";".join(filters),
+        "-map", f"[{current_video}]",
+        "-map", audio_map,
+        "-t", f"{duration:.6f}",
+        "-c:v", "libx264",
+        "-preset", "medium",
+        "-crf", "18",
+        "-c:a", "aac",
+        "-b:a", "192k",
+        "-movflags", "+faststart",
+        "-pix_fmt", "yuv420p",
+        str(destination),
+    ])
+    subprocess.run(cmd, capture_output=True, text=True, check=True)
+    return str(destination)
 
 
 def _ffprobe_duration(media_path: str) -> float:

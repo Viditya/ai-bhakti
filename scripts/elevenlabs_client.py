@@ -17,6 +17,8 @@ your ElevenLabs account has a Hindi-capable voice_id (GET /v1/voices) —
 this client does not pick a voice for you.
 """
 
+from pathlib import Path
+
 import requests
 
 from ffmpeg_assemble import _ffprobe_duration
@@ -45,7 +47,7 @@ class ElevenLabsClient:
         headers = {
             "xi-api-key": self.api_key,
             "Content-Type": "application/json",
-            "Accept": "application/json",
+            "Accept": "audio/mpeg",
         }
         params = {"output_format": output_format}
         body = {"text": text_hindi, "model_id": model_id}
@@ -53,10 +55,12 @@ class ElevenLabsClient:
         response = requests.post(url, headers=headers, params=params, json=body, timeout=120)
         response.raise_for_status()
 
-        with open(output_path, "wb") as f:
+        destination = Path(output_path)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with destination.open("wb") as f:
             f.write(response.content)
 
         return {
-            "audio_path": output_path,
-            "duration_sec": _ffprobe_duration(output_path),
+            "audio_path": str(destination),
+            "duration_sec": _ffprobe_duration(str(destination)),
         }

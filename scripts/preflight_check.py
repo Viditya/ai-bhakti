@@ -31,16 +31,29 @@ def main() -> int:
 
     # Credentials — presence only, not validity.
     import os
-    for env_var in ("HIGGSFIELD_API_KEY", "HIGGSFIELD_API_KEY_SECRET", "ELEVENLABS_API_KEY"):
+    for env_var in (
+        "HIGGSFIELD_API_KEY",
+        "HIGGSFIELD_API_KEY_SECRET",
+        "HIGGSFIELD_SOUL_ID",
+        "ELEVENLABS_API_KEY",
+        "ELEVENLABS_VOICE_ID",
+    ):
         results.append(check(f"env var {env_var}", bool(os.environ.get(env_var))))
 
-    # Character locks — at least one real reference image beyond the README.
+    # Character lock required by the active batch, not merely any PNG.
     lock_dir = PROJECT_ROOT / "references" / "character_locks"
-    lock_images = [p for p in lock_dir.glob("*.png")] if lock_dir.exists() else []
+    active_lock = lock_dir / "hanuman_v1.png"
     results.append(check(
-        "references/character_locks/*.png",
-        bool(lock_images),
-        f"found: {[p.name for p in lock_images]}" if lock_images else "none found - required before Chitrkar can run",
+        "references/character_locks/hanuman_v1.png",
+        active_lock.is_file(),
+        "approved active-batch character reference",
+    ))
+
+    watermark = PROJECT_ROOT / "references" / "brand" / "watermark.png"
+    results.append(check(
+        "references/brand/watermark.png",
+        watermark.is_file(),
+        "required by the brand specification",
     ))
 
     # System binaries required by scripts/ffmpeg_assemble.py.
