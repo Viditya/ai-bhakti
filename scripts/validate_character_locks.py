@@ -39,6 +39,14 @@ def validate_manifest(path: Path = MANIFEST_PATH) -> list[str]:
                 errors.append(f"{lock_id}: production stage is not locked")
             _validate_asset(lock_id, lock, errors)
 
+        for form_id, form in character.get("forms", {}).items():
+            form_lock_id = f"{character_id}/form-{form_id}"
+            if form.get("status") != "locked":
+                errors.append(f"{form_lock_id}: production form is not locked")
+            if not form.get("identity_invariants"):
+                errors.append(f"{form_lock_id}: identity_invariants are required")
+            _validate_asset(form_lock_id, form, errors)
+
         for index, candidate in enumerate(character.get("review_material", []), 1):
             candidate_id = f"{character_id}/candidate-{index}"
             if candidate.get("status") != "candidate":

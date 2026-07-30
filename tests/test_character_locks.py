@@ -30,6 +30,32 @@ class CharacterLockTests(unittest.TestCase):
         finally:
             temporary_path.unlink(missing_ok=True)
 
+    def test_named_forms_are_locked_and_validated(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(
+            set(manifest["characters"]["vishnu"]["forms"]),
+            {"kurma", "mohini"},
+        )
+        for form in manifest["characters"]["vishnu"]["forms"].values():
+            self.assertEqual(form["status"], "locked")
+            self.assertTrue(form["identity_invariants"])
+
+    def test_unlocked_named_form_is_rejected(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        manifest["characters"]["vishnu"]["forms"]["kurma"]["status"] = "candidate"
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", encoding="utf-8", delete=False
+        ) as output:
+            json.dump(manifest, output)
+            temporary_path = Path(output.name)
+        try:
+            errors = validate_manifest(temporary_path)
+            self.assertTrue(
+                any("production form is not locked" in error for error in errors)
+            )
+        finally:
+            temporary_path.unlink(missing_ok=True)
+
 
 if __name__ == "__main__":
     unittest.main()

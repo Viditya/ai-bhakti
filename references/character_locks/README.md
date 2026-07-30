@@ -2,8 +2,9 @@
 
 This directory is the canonical visual identity registry for recurring
 characters. A production shot must resolve a character by both
-`character_id` and `age_stage`; using a nearby age or generating from scratch
-is not allowed.
+`character_id` and `age_stage`, plus `form_id` when a story calls for a
+distinct divine form. Using a nearby age, the base form in place of a named
+form, or generating from scratch is not allowed.
 
 ## Lock hierarchy
 
@@ -15,6 +16,8 @@ is not allowed.
 4. A derived age stage inherits the root identity's facial geometry, palette,
    marks, and signature objects. Only the changes listed in its
    `allowed_age_changes` may vary.
+5. A named form, such as Vishnu's Kurma or Mohini form, has its own immutable
+   lock under `forms` and may not silently fall back to the base stage.
 
 ## Current registry
 
@@ -22,6 +25,12 @@ is not allowed.
 - Indra — ageless-adult production lock.
 - Surya — ageless-adult production lock.
 - Vayu — ageless-mature production lock.
+- Vishnu — ageless-adult production lock; Kurma and Mohini form locks.
+- Shiva — ageless-mature production lock.
+- Lakshmi — ageless-adult production lock.
+- Dhanvantari — ageless-adult production lock.
+- Vasuki — ageless production lock.
+- Bali — ageless-adult production lock.
 
 Run the deterministic integrity check before visual generation:
 
@@ -43,6 +52,7 @@ child or elder versions of an ageless deity merely to fill a matrix.
 - `young_adult`
 - `mature_adult`
 - `elder`
+- `ageless`
 - `ageless_adult`
 - `ageless_mature`
 

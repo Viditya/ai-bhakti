@@ -1,0 +1,90 @@
+{
+  "id": "samudra-manthan-001",
+  "title_hi": "समुद्र मंथन",
+  "subtitle_hi": "अमृत और दिव्य रत्नों की चित्रकथा",
+  "canonical_language": "hi",
+  "audience_age_range": [6, 12],
+  "panels": [
+    {
+      "id": "panel-01",
+      "caption_hi": "देवताओं और असुरों ने अमृत पाने के लिए एक साथ समुद्र मंथन करने का निश्चय क्यों किया?",
+      "scene": "Vishnu calmly advises Indra and Bali to cooperate so the Ocean of Milk can be churned for amrita.",
+      "characters": [
+        {"character_id": "vishnu", "age_stage": "ageless_adult"},
+        {"character_id": "indra", "age_stage": "ageless_adult"},
+        {"character_id": "bali", "age_stage": "ageless_adult"}
+      ]
+    },
+    {
+      "id": "panel-02",
+      "caption_hi": "मन्दराचल पर्वत मथानी बना और नागराज वासुकि रस्सी; दोनों पक्ष क्षीरसागर के तट पर डट गए।",
+      "scene": "Mount Mandara stands in the Ocean of Milk while Vasuki coils around it; Indra leads the devas and Bali leads the asuras on opposite sides.",
+      "characters": [
+        {"character_id": "indra", "age_stage": "ageless_adult"},
+        {"character_id": "bali", "age_stage": "ageless_adult"},
+        {"character_id": "vasuki", "age_stage": "ageless"}
+      ]
+    },
+    {
+      "id": "panel-03",
+      "caption_hi": "मन्दराचल डूबने लगा, तब भगवान विष्णु ने कूर्म रूप धारण कर उसे अपनी विशाल पीठ पर स्थिर कर दिया।",
+      "scene": "An underwater cutaway reveals Vishnu's giant Kurma form supporting the sinking Mandara mountain on his patterned shell.",
+      "characters": [
+        {"character_id": "vishnu", "age_stage": "ageless_adult", "form_id": "kurma"}
+      ]
+    },
+    {
+      "id": "panel-04",
+      "caption_hi": "देवता और असुर पूरी शक्ति से वासुकि को खींचने लगे; क्षीरसागर की गहराइयों में छिपे रत्न जाग उठे।",
+      "scene": "Devas and asuras pull Vasuki rhythmically around Mandara as the Ocean of Milk forms a luminous spiral.",
+      "characters": [
+        {"character_id": "indra", "age_stage": "ageless_adult"},
+        {"character_id": "bali", "age_stage": "ageless_adult"},
+        {"character_id": "vasuki", "age_stage": "ageless"}
+      ]
+    },
+    {
+      "id": "panel-05",
+      "caption_hi": "सबसे पहले भयंकर हलाहल विष निकला। सृष्टि की रक्षा के लिए भगवान शिव ने उसे धारण किया और नीलकंठ कहलाए।",
+      "scene": "Shiva compassionately contains the rising Halahala poison; his throat turns blue while the world remains safe.",
+      "characters": [
+        {"character_id": "shiva", "age_stage": "ageless_mature"}
+      ]
+    },
+    {
+      "id": "panel-06",
+      "caption_hi": "मंथन जारी रहा। कामधेनु, उच्चैःश्रवा, ऐरावत, कौस्तुभ और अनेक दिव्य रत्न प्रकट हुए।",
+      "scene": "A radiant procession of treasures emerges from the Ocean of Milk: Kamadhenu, Uchchaihshravas, Airavata and the Kaustubha jewel.",
+      "characters": []
+    },
+    {
+      "id": "panel-07",
+      "caption_hi": "फिर कमल पर विराजमान देवी लक्ष्मी प्रकट हुईं और उन्होंने भगवान विष्णु को अपना आश्रय चुना।",
+      "scene": "Lakshmi rises serenely on a lotus from the luminous ocean and approaches Vishnu with a flower garland.",
+      "characters": [
+        {"character_id": "lakshmi", "age_stage": "ageless_adult"},
+        {"character_id": "vishnu", "age_stage": "ageless_adult"}
+      ]
+    },
+    {
+      "id": "panel-08",
+      "caption_hi": "अंत में भगवान धन्वंतरि अमृत-कलश लेकर प्रकट हुए, जिसे देखकर देवता और असुर दोनों उत्सुक हो उठे।",
+      "scene": "Dhanvantari emerges from the ocean presenting the single golden amrita pot as devas and asuras watch in awe.",
+      "characters": [
+        {"character_id": "dhanvantari", "age_stage": "ageless_adult"},
+        {"character_id": "indra", "age_stage": "ageless_adult"},
+        {"character_id": "bali", "age_stage": "ageless_adult"}
+      ]
+    },
+    {
+      "id": "panel-09",
+      "caption_hi": "अमृत पर संघर्ष छिड़ा, तब भगवान विष्णु ने मोहिनी रूप धारण कर देवताओं को अमृत दिया; उनका खोया बल लौट आया।",
+      "scene": "Vishnu's Mohini form calmly distributes amrita to the seated devas while the asuras wait across the celestial hall.",
+      "characters": [
+        {"character_id": "vishnu", "age_stage": "ageless_adult", "form_id": "mohini"},
+        {"character_id": "indra", "age_stage": "ageless_adult"},
+        {"character_id": "bali", "age_stage": "ageless_adult"}
+      ]
+    }
+  ]
+}

@@ -13,7 +13,7 @@ ART_HEIGHT = 1370
 BACKGROUND = "#f4e4bd"
 INK = "#3c210e"
 ACCENT = "#a83220"
-DEVANAGARI_FONT = ROOT.parent / "reader" / "public" / "fonts" / "NotoSansDevanagari-Variable.ttf"
+DEVANAGARI_FONT = ROOT.parents[2] / "references" / "fonts" / "NotoSansDevanagari-Variable.ttf"
 
 CAPTIONS = [
     "देवराज इंद्र ने बाल हनुमान पर वज्र क्यों चलाया?",

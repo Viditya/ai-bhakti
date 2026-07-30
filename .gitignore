@@ -12,4 +12,5 @@ experiments/comicbook/reader/
 # Reproducible comic-render intermediates and duplicate experiment PDFs.
 experiments/comicbook/*/rendered_pages/
 experiments/comicbook/*/rendered_pdf/
+experiments/comicbook/*/rendered/
 experiments/comicbook/*/*.pdf

@@ -15,6 +15,7 @@ description: Generates cinematic AI visuals per shot using Higgsfield, condition
     {
       "character_id": "hanuman",
       "age_stage": "child",
+      "form_id": null,
       "character_lock_path": "references/character_locks/hanuman/child/reference_v1.png"
     }
   ]
@@ -32,6 +33,7 @@ description: Generates cinematic AI visuals per shot using Higgsfield, condition
       {
         "character_id": "hanuman",
         "age_stage": "child",
+        "form_id": null,
         "path": "references/character_locks/hanuman/child/reference_v1.png"
       }
     ],
@@ -43,10 +45,12 @@ description: Generates cinematic AI visuals per shot using Higgsfield, condition
 ## Rules
 
 - Resolve every recurring character by the exact `character_id` and
-  `age_stage` in `references/character_locks/manifest.json`.
-- Condition generation on that stage's locked asset. Never generate a
+  `age_stage` in `references/character_locks/manifest.json`. When a request
+  includes `form_id`, resolve that exact locked form asset.
+- Condition generation on that stage's or form's locked asset. Never generate a
   recurring character from scratch.
-- Reject `candidate` assets and reject silent fallback to another age stage.
+- Reject `candidate` assets and reject silent fallback to another age stage,
+  base form, or nearby form.
 - In multi-character shots, supply the lock for every visible recurring
   character, not only the lead.
 - Preserve each manifest `identity_invariants` list. Permit only changes
@@ -67,3 +71,4 @@ description: Generates cinematic AI visuals per shot using Higgsfield, condition
 - Do not silently swap references when a lock fails to load.
 - Do not age a character merely through prompt wording. Every production age
   requires its own reviewed, locked asset and checksum.
+- Do not portray a named divine form using the character's base-stage lock.

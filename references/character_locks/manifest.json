@@ -7,6 +7,7 @@
     "young_adult": { "typical_years": "18-34", "temporal": true },
     "mature_adult": { "typical_years": "35-59", "temporal": true },
     "elder": { "typical_years": "60+", "temporal": true },
+    "ageless": { "typical_years": null, "temporal": false },
     "ageless_adult": { "typical_years": null, "temporal": false },
     "ageless_mature": { "typical_years": null, "temporal": false }
   },
@@ -109,6 +110,155 @@
           "asset": "references/character_locks/vayu/ageless_mature/reference_v1.png",
           "sha256": "e14d5d1330f3c7a536f056bcbd69a02112d0015c11f315b6cd244512ed0aaaee",
           "source": "derived from video_001 panel_07",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "vishnu": {
+      "display_name": "Vishnu",
+      "identity_root_stage": "ageless_adult",
+      "identity_invariants": [
+        "serene youthful oval face and large dark eyes",
+        "deep blue skin",
+        "vertical white tilak with red center line",
+        "tall ornate gold crown with blue jewel",
+        "yellow dhoti and royal blue gold-edged drape",
+        "four arms with conch, discus, mace, and lotus"
+      ],
+      "stages": {
+        "ageless_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/vishnu/ageless_adult/reference_v1.png",
+          "sha256": "deb5174f26da6941c28d9e0ccddac69b9fa3f640a81af4c0354a1755d728ffc0",
+          "source": "approved Samudra Manthan reference",
+          "allowed_age_changes": []
+        }
+      },
+      "forms": {
+        "kurma": {
+          "status": "locked",
+          "asset": "references/character_locks/vishnu/forms/kurma/reference_v1.png",
+          "sha256": "f3252aedd87ee8ae91956482de8bd92cf5f309ef03f1f9f07e119805ee1091f0",
+          "source": "approved Samudra Manthan Kurma reference",
+          "identity_invariants": [
+            "enormous deep-blue divine tortoise",
+            "gold celestial geometry across the shell",
+            "white-and-red Vishnu tilak",
+            "calm protective expression"
+          ]
+        },
+        "mohini": {
+          "status": "locked",
+          "asset": "references/character_locks/vishnu/forms/mohini/reference_v1.png",
+          "sha256": "5176f9dfb00fd840d360ecbc9d0d1c0ed11b47601f8860e8de1dcc9e89d9c91b",
+          "source": "approved Samudra Manthan Mohini reference",
+          "identity_invariants": [
+            "serene oval face and large dark eyes",
+            "vertical white tilak with red center line",
+            "long dark wavy hair",
+            "modest royal-blue sari with gold border",
+            "gold crown with central blue jewel"
+          ]
+        }
+      }
+    },
+    "shiva": {
+      "display_name": "Shiva",
+      "identity_root_stage": "ageless_mature",
+      "identity_invariants": [
+        "mature serene face with neat dark beard and moustache",
+        "ash-blue skin",
+        "three horizontal white forehead lines with central mark",
+        "high matted topknot with crescent moon and Ganga stream",
+        "cobra at the neck and rudraksha beads",
+        "tiger-skin waist cloth"
+      ],
+      "stages": {
+        "ageless_mature": {
+          "status": "locked",
+          "asset": "references/character_locks/shiva/ageless_mature/reference_v1.png",
+          "sha256": "a5a8279de8af1b4c96369817d50c01984370ec7e911a0f1f01ac8aca331b893d",
+          "source": "approved Samudra Manthan reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "lakshmi": {
+      "display_name": "Lakshmi",
+      "identity_root_stage": "ageless_adult",
+      "identity_invariants": [
+        "serene oval face and large dark eyes",
+        "long dark wavy hair",
+        "red sari with intricate gold border",
+        "ornate gold crown and jewelry",
+        "pink lotus association"
+      ],
+      "stages": {
+        "ageless_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/lakshmi/ageless_adult/reference_v1.png",
+          "sha256": "11e339699f91d945f6da29a295c4775ad9c2dc01e751610e66e5664ae52714bc",
+          "source": "approved Samudra Manthan reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "dhanvantari": {
+      "display_name": "Dhanvantari",
+      "identity_root_stage": "ageless_adult",
+      "identity_invariants": [
+        "calm youthful oval face",
+        "blue skin and vertical white tilak with red center",
+        "ornate gold crown with green jewel",
+        "green gold-edged drape and yellow dhoti",
+        "single golden amrita kalasha"
+      ],
+      "stages": {
+        "ageless_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/dhanvantari/ageless_adult/reference_v1.png",
+          "sha256": "2e0db1af45bc37b0ac5d529888610613d876b2a0ecb97b2b922d50994c0c19d2",
+          "source": "approved Samudra Manthan reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "vasuki": {
+      "display_name": "Vasuki",
+      "identity_root_stage": "ageless",
+      "identity_invariants": [
+        "dignified deep-teal naga",
+        "seven-lobed ornamental cobra hood",
+        "gold scale accents and brow ornament",
+        "calm intelligent eyes",
+        "pale gold underbelly"
+      ],
+      "stages": {
+        "ageless": {
+          "status": "locked",
+          "asset": "references/character_locks/vasuki/ageless/reference_v1.png",
+          "sha256": "ec0f44aae5ba5a78edf2f4bcfcd2f6788916342f829a25de66acbcb53f50ea82",
+          "source": "approved Samudra Manthan reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "bali": {
+      "display_name": "Bali",
+      "identity_root_stage": "ageless_adult",
+      "identity_invariants": [
+        "broad noble face with dark beard and moustache",
+        "long black hair",
+        "dark gold crown with upward side points",
+        "black drape, bronze armor, and deep red dhoti",
+        "heavy gold armlets and earrings"
+      ],
+      "stages": {
+        "ageless_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/bali/ageless_adult/reference_v1.png",
+          "sha256": "75babc32dff529189be5cc8fb42ecf5626ccd5773df706844483378d5a1e10cb",
+          "source": "approved Samudra Manthan reference",
           "allowed_age_changes": []
         }
       }
