@@ -18,7 +18,7 @@ Set only in the local environment or .env: HIGGSFIELD_API_KEY, HIGGSFIELD_API_KE
 ## Controlled run order
 
 1. A fluent Hindi reviewer approves the eight captions and narration text.
-2. Confirm the Higgsfield Soul ID from the mature Hanuman lock and create one short image-to-video motion test from panel 1.
+2. Install the pinned official SDK with pnpm install, confirm the Higgsfield Soul ID from the mature Hanuman lock, then create one short image-to-video motion test from panel 1 using scripts/higgsfield_video.mjs.
 3. Human-review identity drift and artefacts before paying for the remaining panels.
 4. Generate and approve one Hindi ElevenLabs narration.
 5. Assemble reviewed clips, narration, captions, and watermark; run verify_all().

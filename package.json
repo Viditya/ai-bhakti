@@ -1,0 +1,8 @@
+{
+  "name": "ai-bhakti-video-pilot",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@higgsfield/client": "0.2.1"
+  }
+}

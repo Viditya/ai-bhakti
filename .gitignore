@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .venv/
 .tools/
+node_modules/
 tmp/
 output/smoke/
 .env
