@@ -18,6 +18,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image
+from toolchain import find_binary
 
 
 def _require_file(path: str, label: str) -> Path:
@@ -65,7 +66,7 @@ def assemble_video(
     shot_duration = duration / len(shots)
     width, height = resolution
 
-    cmd = ["ffmpeg", "-y"]
+    cmd = [find_binary("ffmpeg"), "-y"]
     for shot in shots:
         cmd.extend(["-loop", "1", "-t", f"{shot_duration:.6f}", "-i", str(shot)])
     narration_index = len(shots)
@@ -143,7 +144,7 @@ def assemble_video(
 def _ffprobe_duration(media_path: str) -> float:
     """Return duration in seconds for any audio/video file, via ffprobe."""
     cmd = [
-        "ffprobe", "-v", "error",
+        find_binary("ffprobe"), "-v", "error",
         "-show_entries", "format=duration",
         "-of", "json", media_path,
     ]
@@ -164,7 +165,7 @@ def check_duration_match(
 def check_resolution(video_path: str, expected=(1080, 1920)) -> bool:
     """True if video resolution matches expected (width, height)."""
     cmd = [
-        "ffprobe", "-v", "error",
+        find_binary("ffprobe"), "-v", "error",
         "-select_streams", "v:0",
         "-show_entries", "stream=width,height",
         "-of", "json", video_path,
@@ -177,7 +178,7 @@ def check_resolution(video_path: str, expected=(1080, 1920)) -> bool:
 def _extract_frame(video_path: str, timestamp_sec: float, out_path: str) -> bool:
     """Extract a single frame at timestamp_sec. Returns True on success."""
     cmd = [
-        "ffmpeg", "-y", "-ss", str(timestamp_sec), "-i", video_path,
+        find_binary("ffmpeg"), "-y", "-ss", str(timestamp_sec), "-i", video_path,
         "-frames:v", "1", out_path,
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)

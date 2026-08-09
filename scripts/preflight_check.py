@@ -9,12 +9,11 @@ are SET, not that they're valid (that requires a real API call, which
 costs money and belongs to the first real run, not a free preflight).
 """
 
-import shutil
-import subprocess
 import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+from toolchain import find_binary
 
 
 def check(label: str, ok: bool, detail: str = "") -> bool:
@@ -24,6 +23,13 @@ def check(label: str, ok: bool, detail: str = "") -> bool:
         line += f" - {detail}"
     print(line)
     return ok
+
+
+def warn(label: str, detail: str = "") -> None:
+    line = f"[OPTIONAL] {label}"
+    if detail:
+        line += f" - {detail}"
+    print(line)
 
 
 def main() -> int:
@@ -40,11 +46,10 @@ def main() -> int:
     ):
         results.append(check(f"env var {env_var}", bool(os.environ.get(env_var))))
 
-    # Character lock required by the active batch, not merely any PNG.
-    lock_dir = PROJECT_ROOT / "references" / "character_locks"
-    active_lock = lock_dir / "hanuman_v1.png"
+    # The active pilot selects its lock through the versioned registry.
+    active_lock = PROJECT_ROOT / "references" / "character_locks" / "hanuman" / "mature_adult" / "reference_v1.png"
     results.append(check(
-        "references/character_locks/hanuman_v1.png",
+        "active Hanuman character lock",
         active_lock.is_file(),
         "approved active-batch character reference",
     ))
@@ -56,9 +61,13 @@ def main() -> int:
         "required by the brand specification",
     ))
 
-    # System binaries required by scripts/ffmpeg_assemble.py.
+    # Project-local portable binaries are preferred; PATH remains supported.
     for binary in ("ffmpeg", "ffprobe"):
-        results.append(check(f"{binary} on PATH", shutil.which(binary) is not None))
+        try:
+            binary_path = find_binary(binary)
+            results.append(check(f"{binary} available", True, binary_path))
+        except FileNotFoundError:
+            results.append(check(f"{binary} available", False, "install the portable toolchain or add it to PATH"))
 
     # Python deps.
     for module in ("requests", "PIL"):
@@ -71,9 +80,9 @@ def main() -> int:
     # face_recognition is optional (heavy dlib build) — warn, don't fail.
     try:
         __import__("face_recognition")
-        check("python module face_recognition (optional)", True)
+        warn("python module face_recognition", "automated Mode B scoring available")
     except ImportError:
-        check("python module face_recognition (optional)", False, "Mode B falls back to manual scoring without it")
+        warn("python module face_recognition", "manual visual identity review is required instead")
 
     print()
     if all(results):

@@ -37,6 +37,18 @@
             "no crown",
             "no mace"
           ]
+        },
+        "mature_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/hanuman/mature_adult/reference_v1.png",
+          "sha256": "2d45f2d1ab2a6869d64a751f35100e32271eadbb31d4f46441393c2dc7d4eefa",
+          "source": "approved Sundara Kanda mature Hanuman reference",
+          "allowed_age_changes": [
+            "heroic adult proportions",
+            "broader shoulders and mature facial structure",
+            "small gold diadem",
+            "modest gold armlets and wrist cuffs"
+          ]
         }
       },
       "review_material": [
@@ -259,6 +271,69 @@
           "asset": "references/character_locks/bali/ageless_adult/reference_v1.png",
           "sha256": "75babc32dff529189be5cc8fb42ecf5626ccd5773df706844483378d5a1e10cb",
           "source": "approved Samudra Manthan reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "ravana": {
+      "display_name": "Ravana",
+      "identity_root_stage": "ageless_mature",
+      "identity_invariants": [
+        "broad dignified mature face with intense dark eyes",
+        "deep bronze-brown skin",
+        "long black hair with strong moustache and short beard",
+        "towering black-and-gold crown",
+        "crimson and black royal garments with antique-gold armor",
+        "nine-profile golden halo around the primary head"
+      ],
+      "stages": {
+        "ageless_mature": {
+          "status": "locked",
+          "asset": "references/character_locks/ravana/ageless_mature/reference_v1.png",
+          "sha256": "a4f22678dea9d10f9298c4dfa536c46521e16538190fcacca31cc2e5efea693c",
+          "source": "approved Sundara Kanda reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "sita": {
+      "display_name": "Sita",
+      "identity_root_stage": "young_adult",
+      "identity_invariants": [
+        "gentle oval face and large expressive dark eyes",
+        "warm medium-brown skin",
+        "long black hair in a single simple braid",
+        "small red bindi",
+        "weathered saffron-yellow sari with muted red border",
+        "minimal jewelry and no crown during captivity"
+      ],
+      "stages": {
+        "young_adult": {
+          "status": "locked",
+          "asset": "references/character_locks/sita/young_adult/reference_v1.png",
+          "sha256": "6824ddb0eca20b13a6951ec9406e469c61823f281c7a2b0190a5ffb7de92ec43",
+          "source": "approved Sundara Kanda Ashoka Vatika reference",
+          "allowed_age_changes": []
+        }
+      }
+    },
+    "vibhishana": {
+      "display_name": "Vibhishana",
+      "identity_root_stage": "ageless_mature",
+      "identity_invariants": [
+        "tall composed rakshasa prince with thoughtful dark eyes",
+        "warm deep-brown skin",
+        "long black hair tied back with trimmed beard and moustache",
+        "vertical white Vaishnava tilak with fine red center",
+        "restrained dark-teal and cream royal garments",
+        "lower gold crown and modest antique-gold armor"
+      ],
+      "stages": {
+        "ageless_mature": {
+          "status": "locked",
+          "asset": "references/character_locks/vibhishana/ageless_mature/reference_v1.png",
+          "sha256": "43747599cac6145b48eebb0d5c1637e78b5fe3cebd44471d8d6dc8abd004dea2",
+          "source": "approved Sundara Kanda reference",
           "allowed_age_changes": []
         }
       }

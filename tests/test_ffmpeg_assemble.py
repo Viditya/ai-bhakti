@@ -14,6 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 import ffmpeg_assemble as fa  # noqa: E402
+from toolchain import find_binary  # noqa: E402
 
 TMP = Path(tempfile.gettempdir()) / "ai_bhakti_test_assets"
 TMP.mkdir(exist_ok=True)
@@ -28,7 +29,7 @@ def make_good_clip():
     # 5 seconds of a warm-gold color video with a white box bottom-right
     # (simulating a watermark) drawn via drawbox filter.
     subprocess.run([
-        "ffmpeg", "-y", "-f", "lavfi",
+        find_binary("ffmpeg"), "-y", "-f", "lavfi",
         "-i", "color=c=0x8a6a1e:s=1080x1920:d=5",
         "-vf", "drawbox=x=810:y=1650:w=220:h=220:color=white:t=fill",
         video_path,
@@ -36,7 +37,7 @@ def make_good_clip():
 
     # 5 seconds of a 440Hz tone as narration stand-in
     subprocess.run([
-        "ffmpeg", "-y", "-f", "lavfi",
+        find_binary("ffmpeg"), "-y", "-f", "lavfi",
         "-i", "sine=frequency=440:duration=5",
         audio_path,
     ], check=True, capture_output=True)
@@ -51,13 +52,13 @@ def make_bad_clip():
     audio_path = str(TMP / "bad_audio.wav")
 
     subprocess.run([
-        "ffmpeg", "-y", "-f", "lavfi",
+        find_binary("ffmpeg"), "-y", "-f", "lavfi",
         "-i", "color=c=black:s=1080x1920:d=3",
         video_path,
     ], check=True, capture_output=True)
 
     subprocess.run([
-        "ffmpeg", "-y", "-f", "lavfi",
+        find_binary("ffmpeg"), "-y", "-f", "lavfi",
         "-i", "sine=frequency=440:duration=5",
         audio_path,
     ], check=True, capture_output=True)

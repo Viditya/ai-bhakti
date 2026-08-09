@@ -2,6 +2,8 @@ __pycache__/
 *.pyc
 .venv/
 .tools/
+tmp/
+output/smoke/
 .env
 .env.*
 !.env.example

@@ -1,0 +1,78 @@
+{
+  "id": "hanuman-lanka-tail-001",
+  "title_hi": "हनुमान जी की जलती पूँछ",
+  "subtitle_hi": "साहस, बुद्धि और आत्मसंयम की चित्रकथा",
+  "canonical_language": "hi",
+  "audience_age_range": [6, 12],
+  "panels": [
+    {
+      "id": "panel-01",
+      "caption_hi": "रावण की सभा में बँधे हुए हनुमान जी ने निर्भय होकर कहा, “माता सीता को सम्मानपूर्वक श्रीराम के पास लौटा दो।”",
+      "scene": "Bound but fearless Hanuman counsels Ravana in the golden court of Lanka.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"},
+        {"character_id": "ravana", "age_stage": "ageless_mature"}
+      ]
+    },
+    {
+      "id": "panel-02",
+      "caption_hi": "क्रोधित रावण ने उन्हें मारने का आदेश दिया, पर विभीषण ने समझाया कि दूत का वध धर्म के विरुद्ध है।",
+      "scene": "Vibhishana calmly intervenes as Ravana angrily pronounces judgment; Hanuman remains composed.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"},
+        {"character_id": "ravana", "age_stage": "ageless_mature"},
+        {"character_id": "vibhishana", "age_stage": "ageless_mature"}
+      ]
+    },
+    {
+      "id": "panel-03",
+      "caption_hi": "तब राक्षसों ने उनकी पूँछ पर कपड़े लपेटकर तेल डाला और आग लगा दी; अशोक वाटिका में माता सीता ने अग्निदेव से उनकी रक्षा की प्रार्थना की।",
+      "scene": "A respectful split composition: guards wrap Hanuman's lengthening tail while Sita prays beneath an Ashoka tree.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"},
+        {"character_id": "sita", "age_stage": "young_adult"}
+      ]
+    },
+    {
+      "id": "panel-04",
+      "caption_hi": "अग्नि की लपटें हनुमान जी को हिम जैसी शीतल लगीं। उन्होंने छोटा रूप धरकर बंधन खोले, फिर विशाल होकर नगर-द्वार पर जा पहुँचे।",
+      "scene": "Hanuman discovers the sacred flame is cool, slips free in a tiny form, then rises heroic at Lanka's gate.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"}
+      ]
+    },
+    {
+      "id": "panel-05",
+      "caption_hi": "जलती पूँछ के साथ वे लंका की अट्टालिकाओं पर बिजली-सी छलाँग लगाने लगे और रावण के अभिमान से भरे भवनों में आग फैल गई।",
+      "scene": "Hanuman leaps like lightning across Lanka's palace rooftops, his blazing tail tracing an arc through the night.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"}
+      ]
+    },
+    {
+      "id": "panel-06",
+      "caption_hi": "हनुमान जी ने धर्मनिष्ठ विभीषण का घर बचाया, फिर समुद्र में अपनी पूँछ की आग बुझाई।",
+      "scene": "Hanuman deliberately spares Vibhishana's teal-lit home, then lowers the flaming tail into the moonlit sea.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"}
+      ]
+    },
+    {
+      "id": "panel-07",
+      "caption_hi": "लंका को जलता देखकर वे अचानक चिंतित हुए—कहीं माता सीता को हानि तो नहीं पहुँची? उन्होंने क्रोध पर संयम का महत्व समझा।",
+      "scene": "On a cliff above the city, Hanuman looks back with concern and reflects on the danger of uncontrolled anger.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"}
+      ]
+    },
+    {
+      "id": "panel-08",
+      "caption_hi": "आकाश से माता सीता के सुरक्षित होने का समाचार मिला। उन्हें फिर से देखकर हनुमान जी श्रीराम को शुभ संदेश देने लौट चले।",
+      "scene": "Celestial figures confirm Sita is safe; Hanuman respectfully sees her once more and prepares to leap home.",
+      "characters": [
+        {"character_id": "hanuman", "age_stage": "mature_adult"},
+        {"character_id": "sita", "age_stage": "young_adult"}
+      ]
+    }
+  ]
+}

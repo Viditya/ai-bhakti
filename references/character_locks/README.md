@@ -21,7 +21,8 @@ form, or generating from scratch is not allowed.
 
 ## Current registry
 
-- Hanuman — child production lock; age-progression sheet is a candidate.
+- Hanuman — child and mature-adult production locks; age-progression sheet
+  remains review material.
 - Indra — ageless-adult production lock.
 - Surya — ageless-adult production lock.
 - Vayu — ageless-mature production lock.
@@ -31,6 +32,9 @@ form, or generating from scratch is not allowed.
 - Dhanvantari — ageless-adult production lock.
 - Vasuki — ageless production lock.
 - Bali — ageless-adult production lock.
+- Ravana — ageless-mature production lock.
+- Sita — young-adult Ashoka Vatika production lock.
+- Vibhishana — ageless-mature production lock.
 
 Run the deterministic integrity check before visual generation:
 
